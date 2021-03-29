@@ -19,7 +19,7 @@ import java.text.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherData {
+public class WeatherData { 
 // key: 0492835dd56389d17aac9f004e9f063b
 
 private static String apiKey = "0492835dd56389d17aac9f004e9f063b";
