@@ -9,21 +9,38 @@ import org.junit.jupiter.api.Test;
 class LocationTests {
 		
 
+			
 			@Test
-			void testZipCodesForLocations() {
-				int goodZipCodeToTest = 63105;
-				Location supposedToWork = new Location(goodZipCodeToTest);
-				assertTrue(supposedToWork.hasZipCode()); //check for correctness
-				assertTrue(supposedToWork.getZipCode() == goodZipCodeToTest);
-				int badZipCodeToTest = 763;
-				Location notSupposedToWork = new Location(badZipCodeToTest);
+			void testHasZipCodeForValidZip() {
+				int zipCode = 63105;
+				Location supposedToWork = new Location(zipCode);
+				assertTrue(supposedToWork.hasZipCode());
+			}
+			
+			@Test
+			void testHasZipCodeForInvalidZip() {
+				int zipCode = 763;
+				Location notSupposedToWork = new Location(zipCode);
 				assertTrue(notSupposedToWork.hasZipCode() == false);
-				assertTrue(notSupposedToWork.getZipCode() == -1);
+			}
+			
+			@Test
+			void testGetZipCodeForValidZip() {
+				int zipCode = 63105;
+				Location supposedToWork = new Location(zipCode);
+				assertTrue(supposedToWork.getZipCode() == zipCode);
+			}
+			
+			@Test
+			void testGetZipCodeForInvalidValidZip() {
+				int zipCode = 763;
+				Location supposedToWork = new Location(zipCode);
+				assertTrue(supposedToWork.getZipCode() == -1);
 			}
 			
 			@Test
 			void testNamesForLocations() {
-				String locationName = "Clayton, MO";
+				String locationName = "Clayton";
 				Location whereMostOfWashUIs = new Location(locationName);
 				assertTrue(whereMostOfWashUIs.getName().equals(locationName));
 			}
