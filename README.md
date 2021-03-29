@@ -11,6 +11,11 @@ Is there anything that you implemented but doesn't currently work?
   The WeatherData class which requests information from the OpenWeather API. 
 
 What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
+To run the code, you can type in the following commands: 
+cd src
+cd code
+javac Menu.java
+java Menu
 
 
 
