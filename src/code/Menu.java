@@ -47,6 +47,7 @@ public class Menu {
 
 	private void createUser() {
 		System.out.println("Please enter a username");
+		clearScanner();
 		String newUserName = getStringInput();
 		System.out.println("Please enter your favorite zip code");
 		int favZip = getNumInput();
@@ -89,9 +90,15 @@ public class Menu {
 	}
 	
 	private int getNumInput() {
-		return keyboardIn.nextInt();
+		int input = keyboardIn.nextInt();
+		return input;
 	}
 	private String getStringInput() {
-		return keyboardIn.nextLine();
+		String input = keyboardIn.nextLine();
+		return input;
+	}
+	
+	private void clearScanner() {
+		String garbage = keyboardIn.next();
 	}
 }
