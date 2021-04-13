@@ -7,6 +7,7 @@ import java.lang.InterruptedException;
 public class Menu {
 	
 	private Scanner keyboardIn;
+	private User currentUser;
 	
 	public Menu() {
 		keyboardIn = new Scanner(System.in);
@@ -34,14 +35,24 @@ public class Menu {
 			
 			int opt = this.getNumInput();
 			this.processZipCode(opt);
-		} else {
+		} else if(selectedOption == 2){
 			this.askForCityName();
 			
 			String opt = this.getStringInput();
 			this.processCityName(opt);
+		}else if(selectedOption == 3 && !signedIn()) {
+			createUser();
 		}
 	}
 
+	private void createUser() {
+		System.out.println("Please enter a username");
+		String newUserName = getStringInput();
+		System.out.println("Please enter your favorite zip code");
+		int favZip = getNumInput();
+		currentUser = new User(newUserName, favZip);
+	}
+	
 	private void processZipCode(int zip) throws IOException, InterruptedException{
 		Location loc = new Location(zip);
 		String weather = loc.getWeather();
@@ -68,6 +79,13 @@ public class Menu {
 		
 		System.out.println("1. Enter a zip code");
 		System.out.println("2. Enter a City Name");
+		if(!signedIn()) {
+			System.out.println("3. Create an Account");
+		}
+	}
+	
+	private boolean signedIn() {
+		return currentUser != null;
 	}
 	
 	private int getNumInput() {

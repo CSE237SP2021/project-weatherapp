@@ -3,10 +3,10 @@ package code;
 public class User {
 	
 	private String name;
-	private double favoriteZip;
+	private int favoriteZip;
 	private String favoriteCity;
 	
-	public User(String name, double zip) {
+	public User(String name, int zip) {
 		this.name = name;
 		this.favoriteZip = zip;
 		this.favoriteCity = "";
@@ -23,7 +23,7 @@ public class User {
 		return name;
 	}
 	
-	public double getFavoriteZip() {
+	public int getFavoriteZip() {
 		return favoriteZip;
 	}
 
