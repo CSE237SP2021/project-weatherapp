@@ -6,29 +6,28 @@ import java.lang.InterruptedException;
 public class Location {
 	private int zipCode;
 	private String locationName;
-<<<<<<< HEAD
-	private WeatherData weatherGetter = new WeatherData();
-=======
 	private boolean hasZipCode;
 	private boolean hasLocationName;
->>>>>>> 10eb60e0d2e6529b4bb80395fdc464df38974913
+	private WeatherData weatherGetter = new WeatherData();
 
 	public Location(int zip){
-		zipCode = zip;
-		hasZipCode = true;
-		hasLocationName = false;
+		this.zipCode = zip;
+		this.hasZipCode = true;
+		this. hasLocationName = false;
+		this.locationName = "";
 		//weatherAtLocation = 
 	}
 
 	public Location(String place){
-		locationName = place;
-		hasZipCode = false;
-		hasLocationName = true;
+		this.locationName = place;
+		this.hasZipCode = false;
+		this.hasLocationName = true;
+		this.zipCode = 0;
 	}
 
-<<<<<<< HEAD
 	public String getWeather() throws IOException, InterruptedException{
 		if(hasZipCode()) {
+			System.out.println("has zip code");
 			String ret = weatherGetter.makeRequest(String.valueOf(zipCode));
 			return ret; 
 		}
@@ -40,22 +39,5 @@ public class Location {
 			return false;
 		}
 		return true;
-=======
-	public Location(String place, int zip){
-		locationName = place;
-		zipCode = zip;
-		hasLocationName = true;
-		hasZipCode = true;
->>>>>>> 10eb60e0d2e6529b4bb80395fdc464df38974913
-	}
-
-	public String getWeather(){
-		if(hasZipCode){
-			//return weatherGetter.getWeather();
-			return "This is not yet implemented";
-		}else if(hasLocationName){
-			return "This is not yet implemented";
-		}
-		return null;
 	}
 }

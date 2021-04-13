@@ -43,7 +43,6 @@ public class Menu {
 	}
 
 	private void processZipCode(int zip) throws IOException, InterruptedException{
-		System.out.println("Not yet implemented");
 		Location loc = new Location(zip);
 		String weather = loc.getWeather();
 		System.out.println("Current Weather: " + weather);

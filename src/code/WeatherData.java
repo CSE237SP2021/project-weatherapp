@@ -38,7 +38,7 @@ public class WeatherData {
 
 	
 	private static String createUrl(String zip) {
-		return baseURL + zipQuery + zip + apiQuery + apiKey; 
+		return baseURL + zipQuery + ",US" + zip + apiQuery + apiKey; 
 	}
 	
     public static String makeRequest(String zip) throws IOException, InterruptedException {
