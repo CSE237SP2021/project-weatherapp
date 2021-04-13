@@ -31,8 +31,8 @@ import java.util.function.Supplier;
 public class WeatherData {
 	
 	private static String apiKey = "0492835dd56389d17aac9f004e9f063b";
-	private static String zipQuery = "zip=?";
-	private static String cityNameQuery = "city=?";
+	private static String zipQuery = "zip=";
+	private static String cityNameQuery = "city=";
 	private static String baseURL =  "http://api.openweathermap.org/data/2.5/weather?";
 	private static String apiQuery = "&appid=";
 
