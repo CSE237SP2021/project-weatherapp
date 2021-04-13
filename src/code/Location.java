@@ -6,22 +6,27 @@ import java.lang.InterruptedException;
 public class Location {
 	private int zipCode;
 	private String locationName;
+<<<<<<< HEAD
 	private WeatherData weatherGetter = new WeatherData();
+=======
+	private boolean hasZipCode;
+	private boolean hasLocationName;
+>>>>>>> 10eb60e0d2e6529b4bb80395fdc464df38974913
 
 	public Location(int zip){
-		if(zip / 10000 != 0){
-			zipCode = zip;
-		}else {
-			zipCode = -1;
-		}
-		locationName = null;
+		zipCode = zip;
+		hasZipCode = true;
+		hasLocationName = false;
+		//weatherAtLocation = 
 	}
 
 	public Location(String place){
 		locationName = place;
-		zipCode = -1;
+		hasZipCode = false;
+		hasLocationName = true;
 	}
 
+<<<<<<< HEAD
 	public String getWeather() throws IOException, InterruptedException{
 		if(hasZipCode()) {
 			String ret = weatherGetter.makeRequest(String.valueOf(zipCode));
@@ -35,26 +40,22 @@ public class Location {
 			return false;
 		}
 		return true;
+=======
+	public Location(String place, int zip){
+		locationName = place;
+		zipCode = zip;
+		hasLocationName = true;
+		hasZipCode = true;
+>>>>>>> 10eb60e0d2e6529b4bb80395fdc464df38974913
 	}
-	
-	public boolean hasName() {
-		if(locationName != null) {
-			return true;
+
+	public String getWeather(){
+		if(hasZipCode){
+			//return weatherGetter.getWeather();
+			return "This is not yet implemented";
+		}else if(hasLocationName){
+			return "This is not yet implemented";
 		}
-		return false;
-	}
-	
-	/**
-	 * @return the zipCode or -1 if there is not a valid zip code
-	 */
-	public int getZipCode() {
-		return zipCode;
-	}
-	
-	/**
-	 * @return the name of the location or null if there is not a valid name.
-	 */
-	public String getName() {
-		return locationName;
+		return null;
 	}
 }
