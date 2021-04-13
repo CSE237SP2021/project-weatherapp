@@ -1,3 +1,5 @@
+package code; 
+
 import java.net.HttpURLConnection;
 import java.util.*;
 import java.io.InputStream;
@@ -39,10 +41,7 @@ public class WeatherData {
 		return baseURL + zipQuery + zip + apiQuery + apiKey; 
 	}
 	
-	static void main() {
-		makeRequest("06820");
-	}
-    private static void makeRequest(String zip) throws IOException, InterruptedException {
+    public static String makeRequest(String zip) throws IOException, InterruptedException {
 
         URL urlForGetRequest = new URL(createUrl(zip));
         String readLine = null;
@@ -62,8 +61,11 @@ public class WeatherData {
             // print result
             System.out.println("JSON String Result " + response.toString());
             //GetAndPost.POSTRequest(response.toString());
+            return response.toString();
         } else {
             System.out.println("GET NOT WORKED");
         }
+        return "no response";
     }
+
 }

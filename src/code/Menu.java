@@ -1,6 +1,8 @@
 package code;
 
 import java.util.Scanner;
+import java.io.IOException;
+import java.lang.InterruptedException;
 
 public class Menu {
 	
@@ -10,14 +12,14 @@ public class Menu {
 		keyboardIn = new Scanner(System.in);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException{
 		
 		Menu masterMenu = new Menu();
 		masterMenu.runMenu();
 		
 	}
 
-	private void runMenu() {
+	private void runMenu() throws IOException, InterruptedException{
 		this.displayMenu();
 		
 		int selectedOption = this.getNumInput();
@@ -26,7 +28,7 @@ public class Menu {
 		this.keyboardIn.close();
 	}
 
-	private void processMainMenu(int selectedOption) {
+	private void processMainMenu(int selectedOption) throws IOException, InterruptedException {
 		if(selectedOption == 1) {
 			this.askForZipCode();
 			
@@ -40,7 +42,7 @@ public class Menu {
 		}
 	}
 
-	private void processZipCode(int zip) {
+	private void processZipCode(int zip) throws IOException, InterruptedException{
 		System.out.println("Not yet implemented");
 		Location loc = new Location(zip);
 		String weather = loc.getWeather();

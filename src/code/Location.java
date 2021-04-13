@@ -1,9 +1,12 @@
 package code;
 
+import java.io.IOException;
+import java.lang.InterruptedException;
+
 public class Location {
 	private int zipCode;
 	private String locationName;
-	//private WeatherData weatherGetter = new WeatherData();
+	private WeatherData weatherGetter = new WeatherData();
 
 	public Location(int zip){
 		if(zip / 10000 != 0){
@@ -19,11 +22,13 @@ public class Location {
 		zipCode = -1;
 	}
 
-//	public String getWeather(){
-//		if(hasZipCode()) {
-//			weatherGetter.
-//		}
-//	}
+	public String getWeather() throws IOException, InterruptedException{
+		if(hasZipCode()) {
+			String ret = weatherGetter.makeRequest(String.valueOf(zipCode));
+			return ret; 
+		}
+		return "no zip code";
+	}
 	
 	public boolean hasZipCode() {
 		if(zipCode == -1) {
