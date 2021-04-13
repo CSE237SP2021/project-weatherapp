@@ -16,40 +16,54 @@ import java.net.*;
 import java.io.*;
 import java.text.*;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.concurrent.ExecutionException;
+import java.util.function.Supplier;
 
-public class WeatherData { 
 // key: 0492835dd56389d17aac9f004e9f063b
 
-private static String apiKey = "0492835dd56389d17aac9f004e9f063b";
-private static String baseURL =  "http://api.openweathermap.org/data/2.5/weather?";
+public class WeatherData {
+	
+	private static String apiKey = "0492835dd56389d17aac9f004e9f063b";
+	private static String zipQuery = "zip=?";
+	private static String cityNameQuery = "city=?";
+	private static String baseURL =  "http://api.openweathermap.org/data/2.5/weather?";
+	private static String apiQuery = "&appid=";
 
-    public JSONObject UsingZipcode(String zipcode) {
-		String url = makingURL(WeatherApi.site, zipcode);
-		return readJsonFromUrl(url);
+	
+	private static String createUrl(String zip) {
+		return baseURL + zipQuery + zip + apiQuery + apiKey; 
 	}
+	
+	static void main() {
+		makeRequest("06820");
+	}
+    private static void makeRequest(String zip) throws IOException, InterruptedException {
 
-    private String makingURL(String baseUrl, String zipcode){
-        String URL = baseUrl + "zip=" + zipcode + "?api_key=" + WeatherData.apiKey;
-        return URL;
+        URL urlForGetRequest = new URL(createUrl(zip));
+        String readLine = null;
+        HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
+        conection.setRequestMethod("GET");
+        //conection.setRequestProperty("userId", "a1bcdef"); // set userId its a sample here
+        int responseCode = conection.getResponseCode();
+
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(conection.getInputStream()));
+            StringBuffer response = new StringBuffer();
+            while ((readLine = in .readLine()) != null) {
+                response.append(readLine);
+            } in .close();
+            // print result
+            System.out.println("JSON String Result " + response.toString());
+            //GetAndPost.POSTRequest(response.toString());
+        } else {
+            System.out.println("GET NOT WORKED");
+        }
     }
-    
-    public static void main() {
-        // create a client
-    var client = HttpClient.newHttpClient();
-
-    // create a request
-    var request = HttpRequest.newBuilder(
-       URI.create(baseURL + apiKey))
-     .header("accept", "application/json")
-     .build();
-
-    // use the client to send the request
-    var response = client.send(request, new JsonBodyHandler<>(APOD.class));
-
-    // the response:
-        System.out.println(response.body().get().description);
-    }
-
 }
