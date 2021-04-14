@@ -28,14 +28,18 @@ public class Location {
 	public String getWeather() throws IOException, InterruptedException{
 		if(hasZipCode()) {
 			System.out.println("has zip code");
-			String ret = weatherGetter.makeRequest(String.valueOf(zipCode));
+			String ret = weatherGetter.makeRequest(String.valueOf(zipCode), true);
 			return ret; 
 		}
-		return "no zip code";
+		else{
+			System.out.println("no zip code, has city name");
+			String ret = weatherGetter.makeRequest(locationName, false);
+			return ret;
+		}
 	}
 	
 	public boolean hasZipCode() {
-		if(zipCode == -1) {
+		if(hasZipCode == false) {
 			return false;
 		}
 		return true;

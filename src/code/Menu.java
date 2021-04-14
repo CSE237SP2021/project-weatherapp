@@ -42,7 +42,7 @@ public class Menu {
 			this.processZipCode(opt);
 		} else if(selectedOption == 2){
 			this.askForCityName();
-			
+			clearScanner();
 			String opt = this.getStringInput();
 			this.processCityName(opt);
 		}else if(selectedOption == 3 && !signedIn()) {
@@ -85,9 +85,10 @@ public class Menu {
 		
 	}
 
-	private void processCityName(String opt) {
-		System.out.println("Not yet implemented");
-		
+	private void processCityName(String opt) throws IOException, InterruptedException {
+		Location loc = new Location(opt);
+		String weather = loc.getWeather();
+		System.out.println("Current Weather: " + weather);
 	}
 
 	private void askForZipCode() {
