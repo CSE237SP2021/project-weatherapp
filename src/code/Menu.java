@@ -8,15 +8,19 @@ public class Menu {
 	
 	private Scanner keyboardIn;
 	private User currentUser;
+	private boolean shouldExit;
 	
 	public Menu() {
 		keyboardIn = new Scanner(System.in);
+		shouldExit = false;
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException{
 		
 		Menu masterMenu = new Menu();
-		masterMenu.runMenu();
+		while(!masterMenu.shouldExit) {
+			masterMenu.runMenu();
+		}
 		
 	}
 
@@ -26,7 +30,6 @@ public class Menu {
 		int selectedOption = this.getNumInput();
 		
 		this.processMainMenu(selectedOption);
-		this.keyboardIn.close();
 	}
 
 	private void processMainMenu(int selectedOption) throws IOException, InterruptedException {
