@@ -9,10 +9,12 @@ public class Menu {
 	private Scanner keyboardIn;
 	private User currentUser;
 	private boolean shouldExit;
+	private boolean firstTime;
 	
 	public Menu() {
 		keyboardIn = new Scanner(System.in);
 		shouldExit = false;
+		firstTime = true;
 	}
 
 	public static void main(String[] args) throws IOException, InterruptedException{
@@ -52,9 +54,28 @@ public class Menu {
 		System.out.println("Please enter a username");
 		clearScanner();
 		String newUserName = getStringInput();
-		System.out.println("Please enter your favorite zip code");
-		int favZip = getNumInput();
-		currentUser = new User(newUserName, favZip);
+		boolean useName = determineZipOrName();
+		if(useName) {
+			System.out.println("Please enter the name of your favorite city");
+			clearScanner();
+			String favCity = getStringInput();
+			currentUser = new User(newUserName, favCity);
+		}else {
+			System.out.println("Please enter your favorite zip code");
+			int favZip = getNumInput();
+			currentUser = new User(newUserName, favZip);
+		}
+	}
+	
+	private boolean determineZipOrName() {
+		System.out.println("Please select an option: ");
+		System.out.println("1. Enter your favorite zip code");
+		System.out.println("2. Enter your favorite city");
+		int input = getNumInput();
+		if(input == 1) {
+			return false;
+		}
+		return true;
 	}
 	
 	private void processZipCode(int zip) throws IOException, InterruptedException{
@@ -78,7 +99,10 @@ public class Menu {
 	}
 
 	private void displayMenu() {
-		System.out.println("Welcome to WonderfulWeatherApp!");
+		if(firstTime) {
+			System.out.println("Welcome to WonderfulWeatherApp!");
+			firstTime = false;
+		}
 		System.out.println("Please select an option: ");
 		
 		System.out.println("1. Enter a zip code");
