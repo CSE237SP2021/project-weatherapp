@@ -32,18 +32,27 @@ public class WeatherData {
 	
 	private static String apiKey = "0492835dd56389d17aac9f004e9f063b";
 	private static String zipQuery = "zip=";
-	private static String cityNameQuery = "city=";
+    private static String cityNameQuery = "q=";
 	private static String baseURL =  "http://api.openweathermap.org/data/2.5/weather?";
 	private static String apiQuery = "&appid=";
 
 	
-	private static String createUrl(String zip) {
-		return baseURL + zipQuery + ",US" + zip + apiQuery + apiKey; 
+	private static String createZipUrl(String zip) {
+		return baseURL + zipQuery + zip + ",US" + apiQuery + apiKey; 
 	}
-	
-    public static String makeRequest(String zip) throws IOException, InterruptedException {
 
-        URL urlForGetRequest = new URL(createUrl(zip));
+    private static String createCityUrl(String city){
+        return baseURL + cityNameQuery + city + apiQuery + apiKey; 
+    }
+	
+    public static String makeRequest(String zip, boolean hasZipCode) throws IOException, InterruptedException {
+
+        URL urlForGetRequest; 
+        if(!hasZipCode){
+            urlForGetRequest = new URL(createCityUrl(zip));
+        }else{
+            urlForGetRequest = new URL(createZipUrl(zip));
+        }
         String readLine = null;
         HttpURLConnection conection = (HttpURLConnection) urlForGetRequest.openConnection();
         conection.setRequestMethod("GET");
