@@ -54,6 +54,12 @@ public class Menu {
 		}else if(selectedOption == 4 && !signedIn()) {
 			signIn();
 		}else if(selectedOption == 3 && signedIn()) {
+			if(currentUser.getFavoriteZip() == -1) {
+				processCityName(currentUser.getFavoriteCity());
+			}else {
+				processZipCode(currentUser.getFavoriteZip());
+			}
+		}else if(selectedOption == 4 && signedIn()) {
 			signOut();
 		}
 	}
@@ -138,7 +144,8 @@ public class Menu {
 			System.out.println("3. Create an Account");
 			System.out.println("4. Sign In");
 		}else {
-			System.out.println("3. Sign out");
+			System.out.println("3. Get the weather at your favorite place");
+			System.out.println("4. Sign out");
 		}
 	}
 	
