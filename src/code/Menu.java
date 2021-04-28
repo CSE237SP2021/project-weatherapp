@@ -121,9 +121,9 @@ public class Menu {
 	
 	private void processFavorite() throws IOException, InterruptedException {
 		if(currentUser.favoriteIsZipCode()) {
-			processCityName(currentUser.getFavoriteCity());
-		}else {
 			processZipCode(currentUser.getFavoriteZip());
+		}else {
+			processCityName(currentUser.getFavoriteCity());
 		}
 	}
 
