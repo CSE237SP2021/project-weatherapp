@@ -69,14 +69,15 @@ public class WeatherData {
                 response.append(readLine);
             } in .close();
             
-            
             String responseString = response.toString();
             
+//            Searching for description in the JSON and added to the response string
             int start = responseString.indexOf("description") + 14;
             int end = responseString.indexOf("\"", start);
             
             String returnString = responseString.substring(start, end);
             
+//            Searching for temp_min and adding to response string
             start = responseString.indexOf("temp_min") + 10;
             end = responseString.indexOf(",", start);
             
@@ -85,7 +86,7 @@ public class WeatherData {
   
             returnString += " with a low of " + (Math.round(fahrenheit_min));
             
-            
+//          Searching for temp_max and adding to response string
             start = responseString.indexOf("temp_max") + 10;
             end = responseString.indexOf(",", start);
             
@@ -94,9 +95,11 @@ public class WeatherData {
             
             returnString += " and a high of " + (Math.round(fahrenheit_max) + ". ");
          
+//            returns the description of weather, the min and the max temperature
             return returnString;
 
         } else {
+//        	if get request failed
             System.out.println("GET NOT WORKED");
         }
         return "no response";
