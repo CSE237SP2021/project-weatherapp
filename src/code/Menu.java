@@ -54,6 +54,8 @@ public class Menu {
 		}else if(selectedOption == 4 && !signedIn()) {
 			signIn();
 		}else if(selectedOption == 3 && signedIn()) {
+			processFavorite();
+		}else if(selectedOption == 4 && signedIn()) {
 			signOut();
 		}
 	}
@@ -116,6 +118,14 @@ public class Menu {
 		String weather = loc.getWeather();
 		System.out.println("Current Weather: " + weather);
 	}
+	
+	private void processFavorite() throws IOException, InterruptedException {
+		if(currentUser.favoriteIsZipCode()) {
+			processZipCode(currentUser.getFavoriteZip());
+		}else {
+			processCityName(currentUser.getFavoriteCity());
+		}
+	}
 
 	private void askForZipCode() {
 		System.out.println("Please Enter a 6 digit zip code.");
@@ -138,7 +148,8 @@ public class Menu {
 			System.out.println("3. Create an Account");
 			System.out.println("4. Sign In");
 		}else {
-			System.out.println("3. Sign out");
+			System.out.println("3. Get the weather at your favorite place");
+			System.out.println("4. Sign out");
 		}
 	}
 	

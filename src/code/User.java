@@ -30,4 +30,11 @@ public class User {
 	public String getFavoriteCity() {
 		return favoriteCity;
 	}
+	
+	public boolean favoriteIsZipCode() {
+		if(favoriteZip == -1) {
+			return false;
+		}
+		return true;
+	}
 }
