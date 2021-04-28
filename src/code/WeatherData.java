@@ -1,6 +1,7 @@
 package code; 
 
 import java.net.HttpURLConnection;
+
 import java.util.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,10 +68,34 @@ public class WeatherData {
             while ((readLine = in .readLine()) != null) {
                 response.append(readLine);
             } in .close();
-            // print result
-            System.out.println("JSON String Result " + response.toString());
-            //GetAndPost.POSTRequest(response.toString());
-            return response.toString();
+            
+            
+            String responseString = response.toString();
+            
+            int start = responseString.indexOf("description") + 14;
+            int end = responseString.indexOf("\"", start);
+            
+            String returnString = responseString.substring(start, end);
+            
+            start = responseString.indexOf("temp_min") + 10;
+            end = responseString.indexOf(",", start);
+            
+            double kelvin_min = Double.parseDouble(responseString.substring(start, end));
+            double fahrenheit_min = ((kelvin_min - 273.15) * (9/5)) + 32;
+  
+            returnString += " with a low of " + (Math.round(fahrenheit_min));
+            
+            
+            start = responseString.indexOf("temp_max") + 10;
+            end = responseString.indexOf(",", start);
+            
+            double kelvin_max = Double.parseDouble(responseString.substring(start, end));
+            double fahrenheit_max = ((kelvin_max - 273.15) * (9/5)) + 32;
+            
+            returnString += " and a high of " + (Math.round(fahrenheit_max) + ". ");
+         
+            return returnString;
+
         } else {
             System.out.println("GET NOT WORKED");
         }
