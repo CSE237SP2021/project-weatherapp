@@ -54,11 +54,7 @@ public class Menu {
 		}else if(selectedOption == 4 && !signedIn()) {
 			signIn();
 		}else if(selectedOption == 3 && signedIn()) {
-			if(currentUser.getFavoriteZip() == -1) {
-				processCityName(currentUser.getFavoriteCity());
-			}else {
-				processZipCode(currentUser.getFavoriteZip());
-			}
+			processFavorite();
 		}else if(selectedOption == 4 && signedIn()) {
 			signOut();
 		}
@@ -121,6 +117,14 @@ public class Menu {
 		Location loc = new Location(opt);
 		String weather = loc.getWeather();
 		System.out.println("Current Weather: " + weather);
+	}
+	
+	private void processFavorite() throws IOException, InterruptedException {
+		if(currentUser.favoriteIsZipCode()) {
+			processCityName(currentUser.getFavoriteCity());
+		}else {
+			processZipCode(currentUser.getFavoriteZip());
+		}
 	}
 
 	private void askForZipCode() {
